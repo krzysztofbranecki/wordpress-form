@@ -1,0 +1,8 @@
+.wp-block-front-it-form {
+  margin: 1.25rem;
+}
+
+.wp-block-front-it-form .front-it-form {
+  border: 0.0625rem dashed #ddd;
+  padding: 1.25rem;
+}

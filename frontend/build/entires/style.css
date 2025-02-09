@@ -1,0 +1,79 @@
+.entries-items {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.entry-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.entry-item:last-child {
+  border-bottom: none; /* Remove border from last item */
+}
+
+.entry-item:hover {
+  background-color: #f9f9f9;
+}
+
+.entry-item.active {
+  background-color: #e9f7ff;
+}
+
+.entry-details {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.entry-item.active + .entry-details {
+  max-height: 500px; /* Adjust based on expected content size */
+  padding: 10px;
+}
+
+.entry-fields {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.entry-field {
+  flex: 1 1 45%; /* Adjust width of each field */
+  margin-bottom: 10px;
+}
+
+.entry-field strong {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.load-more-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #0073aa;
+  color: #fff;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.load-more-button:hover {
+  background-color: #005177;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
