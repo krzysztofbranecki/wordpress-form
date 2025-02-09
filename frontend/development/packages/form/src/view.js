@@ -1,4 +1,3 @@
-console.log('Hello from the view script!');
 
 document.addEventListener('DOMContentLoaded', function() {
     const forms = document.querySelectorAll('.front-it-form');

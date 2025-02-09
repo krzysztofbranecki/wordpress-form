@@ -112,6 +112,16 @@ class Feedback {
 	}
 
 	/**
+	 * Get total count of feedback entries
+	 *
+	 * @return int
+	 */
+	public function get_total_count() {
+		global $wpdb;
+		return (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$this->table_name}" );
+	}
+
+	/**
 	 * Get field formats for wpdb
 	 *
 	 * @return array

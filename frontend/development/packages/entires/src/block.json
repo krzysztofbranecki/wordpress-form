@@ -1,0 +1,26 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "front-it/entries-list",
+    "version": "0.1.0",
+    "title": "Front-IT entries list",
+    "category": "front-it",
+    "description": "Display a list of form entries with configurable limit",
+    "attributes": {
+        "entriesLimit": {
+            "type": "number",
+            "default": 10,
+            "minimum": 1,
+            "maximum": 100
+        }
+    },
+    "supports": {
+        "html": false
+    },
+    "textdomain": "front-it",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.css",
+    "style": "file:./style.css",
+    "viewScript": "file:./view.js",
+    "render": "file:./render.php"
+}

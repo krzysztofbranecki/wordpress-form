@@ -1,0 +1,12 @@
+{
+    "name": "@front-it/entries",
+    "version": "1.0.0",
+    "description": "",
+    "main": "build/index.js",
+    "type": "module",
+    "scripts": {
+        "dev": "vite build --emptyOutDir --watch --mode development",
+        "build": "vite build --emptyOutDir"
+    },
+    "author": "Krzysztof Branecki"
+}
