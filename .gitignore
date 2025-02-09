@@ -1,0 +1,14 @@
+# Dependencies ( TODO: Add dependencies to CI )
+# /vendor/
+
+# IDE & System Files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Build files ( TODO: Add build files to CI )
+# /build/
+# /dist/

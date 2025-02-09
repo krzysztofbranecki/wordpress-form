@@ -1,0 +1,43 @@
+{
+    "name": "front-it/form",
+    "description": "Front IT Form WordPress Plugin",
+    "type": "wordpress-plugin",
+    "version": "1.0.0",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Krzystof Branecki",
+            "email": "your.email@example.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.3"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.8",
+        "wp-coding-standards/wpcs": "^3.0",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "automattic/vipwpcs": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "FrontIT\\Form\\": "src/"
+        }
+    },
+    "scripts": {
+        "phpcs": "phpcs",
+        "phpcbf": "phpcbf",
+        "lint": "phpcs --standard=phpcs.xml.dist",
+        "fix": "phpcbf --standard=phpcs.xml.dist"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "platform": {
+            "php": "8.3"
+        }
+    }
+}
