@@ -41,7 +41,7 @@ if ( $is_logged_in ) {
 				<textarea id="message" name="message" class="form-control" rows="4" placeholder="Enter your message" required></textarea>
 			</div>
 			
-			<button type="submit" class="submit-button">Submit</button>
-			<div class="response-message"></div>
+			<button type="submit" class="submit-button"><?php echo ! empty( $attributes['submitButtonText'] ) ? esc_html( $attributes['submitButtonText'] ) : 'Submit'; ?></button>
 		</form>
+		<div class="response-message"></div>
 	</div>

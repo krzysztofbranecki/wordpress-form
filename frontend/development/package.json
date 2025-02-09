@@ -10,7 +10,7 @@
         "dev": "npx lerna run dev",
         "build": "npx lerna run build",
         "lint": "eslint . --ext .ts,.tsx,.jsx",
-        "format-code:fix": "prettier --config './.prettierrc.json' --write './**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
+        "format-code:fix": "prettier --config './.prettierrc' --write './**/*.{js,jsx,ts,tsx,json,css,scss,md}'"
     },
     "dependencies": {
         "@wordpress/block-editor": "^14.10.1",

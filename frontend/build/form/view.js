@@ -1,7 +1,7 @@
 (() => {
   // src/view.js
   document.addEventListener("DOMContentLoaded", function() {
-    const forms = document.querySelectorAll(".front-it-form");
+    const forms = document.querySelectorAll(".front-it-form .contact-form");
     forms.forEach((form) => {
       form.addEventListener("submit", async function(e) {
         e.preventDefault();
@@ -31,6 +31,7 @@
           if (data.success) {
             responseDiv.innerHTML = `<div class="success-message">${data.message || "Thank you! Your message has been sent successfully."}</div>`;
             e.target.reset();
+            form.classList.add("form-hidden");
           } else {
             responseDiv.innerHTML = `<div class="error-message">${data.message || "Something went wrong. Please try again."}</div>`;
           }
@@ -47,33 +48,7 @@
   function createResponseDiv(form) {
     const div = document.createElement("div");
     div.className = "response-message";
-    form.appendChild(div);
+    form.parentElement.appendChild(div);
     return div;
   }
-  var styles = document.createElement("style");
-  styles.textContent = `
-    .front-it-form .response-message {
-        margin: 1rem 0;
-        padding: 1rem;
-        border-radius: 4px;
-    }
-    
-    .front-it-form .success-message {
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-    }
-    
-    .front-it-form .error-message {
-        background-color: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-    }
-    
-    .front-it-form button[type="submit"]:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-    }
-`;
-  document.head.appendChild(styles);
 })();

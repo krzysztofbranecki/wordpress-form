@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             );
 
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                new Error('Network response was not ok');
             }
 
             const data = await response.json();
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 );
 
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    new Error('Network response was not ok');
                 }
 
                 const data = await response.json();

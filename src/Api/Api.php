@@ -79,8 +79,8 @@ class Api {
 				'args'                => array(
 					'id' => array(
 						'required'          => true,
-						'type'             => 'integer',
-						'validate_callback' => function( $param ) {
+						'type'              => 'integer',
+						'validate_callback' => function ( $param ) {
 							return is_numeric( $param ) && $param > 0;
 						},
 					),
@@ -99,17 +99,17 @@ class Api {
 				'args'                => array(
 					'limit'  => array(
 						'required'          => false,
-						'type'             => 'integer',
-						'default'          => 10,
-						'validate_callback' => function( $param ) {
+						'type'              => 'integer',
+						'default'           => 10,
+						'validate_callback' => function ( $param ) {
 							return is_numeric( $param ) && $param > 0 && $param <= 100;
 						},
 					),
 					'offset' => array(
 						'required'          => false,
-						'type'             => 'integer',
-						'default'          => 0,
-						'validate_callback' => function( $param ) {
+						'type'              => 'integer',
+						'default'           => 0,
+						'validate_callback' => function ( $param ) {
 							return is_numeric( $param ) && $param >= 0;
 						},
 					),
@@ -134,16 +134,18 @@ class Api {
 	 * @return WP_REST_Response|WP_Error Response object or error.
 	 */
 	public function get_entries( WP_REST_Request $request ): WP_REST_Response|WP_Error {
-		$limit = $request->get_param( 'limit' );
+		$limit  = $request->get_param( 'limit' );
 		$offset = $request->get_param( 'offset' );
 
 		$feedback = new Feedback();
-		$entries = $feedback->get_all( array(
-			'orderby' => 'created_at',
-			'order'   => 'DESC',
-			'limit'   => $limit,
-			'offset'  => $offset,
-		) );
+		$entries  = $feedback->get_all(
+			array(
+				'orderby' => 'created_at',
+				'order'   => 'DESC',
+				'limit'   => $limit,
+				'offset'  => $offset,
+			) 
+		);
 
 		if ( empty( $entries ) ) {
 			return new WP_REST_Response(
@@ -156,15 +158,18 @@ class Api {
 		}
 
 		// Format entries for response
-		$formatted_entries = array_map( function( $entry ) {
-			return array(
-				'id'         => (int) $entry->id,
-				'created_at' => $entry->created_at,
-				'first_name' => $entry->first_name,
-				'last_name'  => $entry->last_name,
-				'email'      => $entry->email,
-			);
-		}, $entries );
+		$formatted_entries = array_map(
+			function ( $entry ) {
+				return array(
+					'id'         => (int) $entry->id,
+					'created_at' => $entry->created_at,
+					'first_name' => $entry->first_name,
+					'last_name'  => $entry->last_name,
+					'email'      => $entry->email,
+				);
+			},
+			$entries 
+		);
 
 		return new WP_REST_Response(
 			array(
@@ -185,9 +190,9 @@ class Api {
 		$entry_id = $request->get_param( 'id' );
 		
 		$feedback = new Feedback();
-		$entry = $feedback->get($entry_id);
+		$entry    = $feedback->get( $entry_id );
 
-		if ( empty($entry) ) {
+		if ( empty( $entry ) ) {
 			return new WP_Error(
 				'not_found',
 				__( 'Entry not found.', 'front-it' ),
@@ -199,7 +204,7 @@ class Api {
 		$entry_data = array(
 			'id'         => (int) $entry->id,
 			'created_at' => $entry->created_at,
-			'form_name'  => $entry->form_name ?? __('Contact Form', 'front-it'),
+			'form_name'  => $entry->form_name ?? __( 'Contact Form', 'front-it' ),
 			'fields'     => array(
 				'First Name' => $entry->first_name,
 				'Last Name'  => $entry->last_name,

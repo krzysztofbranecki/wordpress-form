@@ -4,16 +4,13 @@ import edit from './edit';
 import './style.scss';
 
 registerBlockType('front-it/entries-list', {
-    description: __(
-        'Display form entries list (admin only)',
-        'front-it',
-    ),
+    description: __('Display form entries list (admin only)', 'front-it'),
     icon: 'list-view',
-    "attributes": {
-        "entriesPerPage": {
-            "type": "number",
-            "default": 10
-        }
+    attributes: {
+        entriesPerPage: {
+            type: 'number',
+            default: 10,
+        },
     },
     edit,
 });

@@ -12,11 +12,11 @@ registerBlockType('front-it/form', {
     attributes: {
         formTitle: {
             type: 'string',
-            default: __('Contact Us', 'front-it'),
+            default: '',
         },
         submitButtonText: {
             type: 'string',
-            default: __('Send Message', 'front-it'),
+            default: '',
         },
     },
     edit,

@@ -52,7 +52,7 @@ class Plugin {
 		$this->version        = Constants::VERSION;
 		$this->db_version     = Constants::DB_VERSION;
 		$this->blocks_manager = new BlocksManager();
-		$this->api           = new Api();
+		$this->api            = new Api();
 	}
 
 	/**
