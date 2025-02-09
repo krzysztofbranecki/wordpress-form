@@ -12,5 +12,6 @@
     "textdomain": "front-it",
     "editorScript": "file:./index.js",
     "editorStyle": "file:./editor.css",
-    "style": "file:./style.css"
+    "style": "file:./style.css",
+    "viewScript": "file:./view.js"
 }
