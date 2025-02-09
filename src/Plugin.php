@@ -1,52 +1,83 @@
 <?php
+/**
+ * Main plugin class
+ *
+ * @package FrontIT\Form
+ */
 
 namespace FrontIT\Form;
 
+use FrontIT\Form\Blocks\BlocksManager;
+
+/**
+ * Class Plugin
+ *
+ * Main plugin class
+ */
 class Plugin {
+
 	/**
+	 * Plugin version
+	 *
 	 * @var string
 	 */
 	private $version;
 
 	/**
+	 * Database version
+	 *
 	 * @var string
 	 */
 	private $db_version;
 
 	/**
-	 * Plugin constructor.
+	 * Blocks manager
+	 *
+	 * @var BlocksManager
+	 */
+	private $blocks_manager;
+
+	/**
+	 * Constructor
 	 */
 	public function __construct() {
-		$this->version    = FRONT_IT_FORM_VERSION;
-		$this->db_version = FRONT_IT_FORM_DB_VERSION;
+		$this->version        = Constants::VERSION;
+		$this->db_version     = Constants::DB_VERSION;
+		$this->blocks_manager = new BlocksManager();
 	}
 
 	/**
-	 * Initialize the plugin
+	 * Initialize plugin
+	 *
+	 * @return void
 	 */
-	public function init(): void {
-		add_action( 'init', array( $this, 'pluginInit' ) );
-		add_action( 'admin_menu', array( $this, 'addAdminMenu' ) );
-		add_action( 'plugins_loaded', array( $this, 'checkUpdate' ) );
+	public function init() {
+		add_action( 'init', array( $this, 'plugin_init' ) );
+		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
+		add_action( 'plugins_loaded', array( $this, 'check_update' ) );
 	}
 
 	/**
 	 * Plugin initialization
+	 *
+	 * @return void
 	 */
-	public function pluginInit(): void {
-		// Initialize plugin functionality
+	public function plugin_init() {
+		// Initialize plugin functionality.
 	}
 
 	/**
 	 * Add admin menu
+	 *
+	 * @return void
 	 */
-	public function addAdminMenu(): void {
+	public function add_admin_menu() {
 		add_menu_page(
-			__( 'Front IT Form', 'front-it-form' ),
-			__( 'Front IT Form', 'front-it-form' ),
+			__( 'Front IT Form', Constants::TEXT_DOMAIN ),
+			__( 'Front IT Form', Constants::TEXT_DOMAIN ),
 			'manage_options',
 			'front-it-form',
-			array( $this, 'renderAdminPage' ),
+			array( $this, 'render_admin_page' ),
 			'dashicons-database',
 			30
 		);
@@ -54,21 +85,24 @@ class Plugin {
 
 	/**
 	 * Render admin page
+	 *
+	 * @return void
 	 */
-	public function renderAdminPage(): void {
+	public function render_admin_page() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 		?>
 		<div class="wrap">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-			<p><?php _e( 'Welcome to Front IT Form plugin!', 'front-it-form' ); ?></p>
+			<p><?php esc_html_e( 'Welcome to Front IT Form plugin!', Constants::TEXT_DOMAIN ); ?></p>
 			<p>
-			<?php 
+			<?php
 				printf(
-					__( 'Database Version: %s', 'front-it-form' ),
-					esc_html( get_option( 'front_it_form_db_version', 'Not installed' ) )
-				); 
+					/* translators: %s: Database version */
+					esc_html__( 'Database Version: %s', Constants::TEXT_DOMAIN ),
+					esc_html( get_option( Constants::OPTION_DB_VERSION, 'Not installed' ) )
+				);
 			?>
 			</p>
 		</div>
@@ -77,12 +111,14 @@ class Plugin {
 
 	/**
 	 * Check for updates
+	 *
+	 * @return void
 	 */
-	public function checkUpdate(): void {
-		if ( get_option( 'front_it_form_version' ) !== $this->version ) {
+	public function check_update() {
+		if ( get_option( Constants::OPTION_VERSION ) !== $this->version ) {
 			$installer = new Database\Installer();
 			$installer->install();
-			update_option( 'front_it_form_version', $this->version );
+			update_option( Constants::OPTION_VERSION, $this->version );
 		}
 	}
 } 

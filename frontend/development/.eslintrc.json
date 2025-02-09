@@ -1,0 +1,32 @@
+{
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "requireConfigFile": false,
+        "babelOptions": {
+            "presets": ["@babel/preset-react"]
+        }
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:prettier/recommended",
+        "plugin:react/recommended"
+    ],
+    "env": {
+        "browser": true
+    },
+    "settings": {
+        "import/resolve": {
+            "moduleDirectory": ["node_modules", "src"]
+        }
+    },
+    "rules": {
+        "no-console": "warn",
+        "no-debugger": "warn",
+        "indent": ["error", 4],
+        "class-methods-use-this": "warn",
+        "no-unused-vars": "warn",
+        "react/prop-types": "off"
+    },
+    "workingDirectories": ["<rootDir>/src"]
+}

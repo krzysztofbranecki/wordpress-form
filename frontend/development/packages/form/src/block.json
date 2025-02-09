@@ -1,0 +1,16 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "front-it/form",
+    "version": "0.1.0",
+    "title": "Front-IT Form",
+    "category": "front-it",
+    "description": "",
+    "supports": {
+        "html": false
+    },
+    "textdomain": "front-it",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./editor.css",
+    "style": "file:./style.css"
+}

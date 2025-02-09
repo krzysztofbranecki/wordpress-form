@@ -36,6 +36,6 @@ class Constants {
 	/**
 	 * Plugin options
 	 */
-	const OPTION_VERSION = 'front_it_form_version';
+	const OPTION_VERSION    = 'front_it_form_version';
 	const OPTION_DB_VERSION = 'front_it_form_db_version';
 } 
