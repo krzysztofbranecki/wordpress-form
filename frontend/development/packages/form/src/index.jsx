@@ -1,7 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import edit from './edit';
-import save from './save';
 import './style.scss';
 
 registerBlockType('front-it/form', {
@@ -21,5 +20,4 @@ registerBlockType('front-it/form', {
         },
     },
     edit,
-    save,
 });
