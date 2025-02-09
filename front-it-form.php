@@ -18,8 +18,8 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Composer autoloader
-if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
-	require_once dirname( __FILE__ ) . '/vendor/autoload.php';
+if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
+	require_once __DIR__ . '/vendor/autoload.php';
 }
 
 // Define plugin constants
@@ -36,14 +36,20 @@ function front_it_form_init() {
 add_action( 'plugins_loaded', 'front_it_form_init' );
 
 // Activation Hook
-register_activation_hook( __FILE__, function() {
-	$installer = new Installer();
-	$installer->install();
-	add_option( Constants::OPTION_VERSION, Constants::VERSION );
-	flush_rewrite_rules();
-} );
+register_activation_hook(
+	__FILE__,
+	function () {
+		$installer = new Installer();
+		$installer->install();
+		add_option( Constants::OPTION_VERSION, Constants::VERSION );
+		flush_rewrite_rules();
+	} 
+);
 
 // Deactivation Hook
-register_deactivation_hook( __FILE__, function() {
-	flush_rewrite_rules();
-} );
+register_deactivation_hook(
+	__FILE__,
+	function () {
+		flush_rewrite_rules();
+	} 
+);
