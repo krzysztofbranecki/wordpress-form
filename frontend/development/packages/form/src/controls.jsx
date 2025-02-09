@@ -1,23 +1,35 @@
 import { BlockControls, InspectorControls } from '@wordpress/block-editor';
-import { Toolbar, PanelBody } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import { Toolbar, PanelBody, TextControl } from '@wordpress/components';
 import React from 'react';
 
 const Controls = (props) => {
     const { attributes, setAttributes } = props;
+    const { formTitle, showPhone, showMessage, submitButtonText } = attributes;
 
-    const changeValue = (attribute, value) => {
-        setAttributes({ [attribute]: value });
-    };
     return (
         <>
             <BlockControls>
                 <Toolbar label="Options">
-                    {/* Here you can add options to the block Toolbar */}
+                    {/* Block toolbar options if needed */}
                 </Toolbar>
             </BlockControls>
             <InspectorControls>
-                <PanelBody title="Sidebar title">
-                    {/* Here is some options in sidebar. */}
+                <PanelBody title={__('Form Settings', 'front-it')}>
+                    <TextControl
+                        label={__('Form Title', 'front-it')}
+                        value={formTitle}
+                        onChange={(value) =>
+                            setAttributes({ formTitle: value })
+                        }
+                    />
+                    <TextControl
+                        label={__('Submit Button Text', 'front-it')}
+                        value={submitButtonText}
+                        onChange={(value) =>
+                            setAttributes({ submitButtonText: value })
+                        }
+                    />
                 </PanelBody>
             </InspectorControls>
         </>

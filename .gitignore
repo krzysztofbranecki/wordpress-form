@@ -10,5 +10,5 @@
 Thumbs.db
 
 # Build files ( TODO: Add build files to CI )
-# /build/
+/frontend/build/
 # /dist/
