@@ -1,9 +1,6 @@
 (() => {
   // src/view.js
   document.addEventListener("DOMContentLoaded", function() {
-    const entryItems = document.querySelectorAll(".entry-item");
-    const entryDetails = document.querySelector(".entry-details");
-    const entryContent = document.querySelector(".entry-content");
     const entriesList = document.querySelector(".entries-items");
     const loadMoreBtn = document.querySelector(".load-more-button");
     const entriesCount = document.querySelector(".entries-count");
@@ -21,13 +18,16 @@
         return;
       }
       try {
-        const response = await fetch(`${frontItFormSettings.restUrl}/entries/${entryId}`, {
-          headers: {
-            "X-WP-Nonce": frontItFormSettings.nonce
+        const response = await fetch(
+          `${frontItFormSettings.restUrl}/entries/${entryId}`,
+          {
+            headers: {
+              "X-WP-Nonce": frontItFormSettings.nonce
+            }
           }
-        });
+        );
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          new Error("Network response was not ok");
         }
         const data = await response.json();
         document.querySelectorAll(".entry-item.active").forEach((el) => {
@@ -51,7 +51,10 @@
         this.insertAdjacentHTML("afterend", detailsHtml);
       } catch (error) {
         console.error("Error fetching entry details:", error);
-        this.insertAdjacentHTML("afterend", `<div class="entry-details error">${frontItFormSettings.i18n.errorLoadingDetails}</div>`);
+        this.insertAdjacentHTML(
+          "afterend",
+          `<div class="entry-details error">${frontItFormSettings.i18n.errorLoadingDetails}</div>`
+        );
       }
     }
     if (loadMoreBtn) {
@@ -64,11 +67,14 @@
         const limit = parseInt(this.dataset.limit);
         const offset = page * limit;
         try {
-          const response = await fetch(`${frontItFormSettings.restUrl}/entries?limit=${limit}&offset=${offset}`, {
-            headers: {
-              "X-WP-Nonce": frontItFormSettings.nonce
+          const response = await fetch(
+            `${frontItFormSettings.restUrl}/entries?limit=${limit}&offset=${offset}`,
+            {
+              headers: {
+                "X-WP-Nonce": frontItFormSettings.nonce
+              }
             }
-          });
+          );
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
@@ -80,9 +86,7 @@
               li.dataset.entryId = entry.id;
               li.innerHTML = `
                             <div class="entry-preview">
-                                <span class="entry-date">${entry.created_at}</span>
-                                <span class="entry-name">${entry.first_name} ${entry.last_name}</span>
-                                <span class="entry-email">${entry.email}</span>
+                                <span class="entry-date">${formatDate(entry.created_at)}</span>
                             </div>
                         `;
               entriesList.appendChild(li);
@@ -114,4 +118,13 @@
     }
     attachEntryClickHandlers();
   });
+  function formatDate(date) {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    const hours = String(d.getHours()).padStart(2, "0");
+    const minutes = String(d.getMinutes()).padStart(2, "0");
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+  }
 })();
