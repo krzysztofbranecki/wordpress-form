@@ -8,6 +8,7 @@
 namespace FrontIT\Form;
 
 use FrontIT\Form\Blocks\BlocksManager;
+use FrontIT\Form\Api\Api;
 
 /**
  * Class Plugin
@@ -38,12 +39,20 @@ class Plugin {
 	private $blocks_manager;
 
 	/**
+	 * API handler
+	 *
+	 * @var Api
+	 */
+	private $api;
+
+	/**
 	 * Constructor
 	 */
 	public function __construct() {
 		$this->version        = Constants::VERSION;
 		$this->db_version     = Constants::DB_VERSION;
 		$this->blocks_manager = new BlocksManager();
+		$this->api           = new Api();
 	}
 
 	/**
@@ -55,6 +64,7 @@ class Plugin {
 		add_action( 'init', array( $this, 'plugin_init' ) );
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
 		add_action( 'plugins_loaded', array( $this, 'check_update' ) );
+		$this->api->init();
 	}
 
 	/**
