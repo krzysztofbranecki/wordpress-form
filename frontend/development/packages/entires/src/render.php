@@ -41,15 +41,10 @@ if (!current_user_can('manage_options')) {
                 '<li class="entry-item" data-entry-id="%d">
                     <div class="entry-preview">
                         <span class="entry-date">%s</span>
-                        <span class="entry-name">%s %s</span>
-                        <span class="entry-email">%s</span>
                     </div>
                 </li>',
                 esc_attr($entry->id),
                 esc_html(date('Y-m-d H:i', strtotime($entry->created_at))),
-                esc_html($entry->first_name),
-                esc_html($entry->last_name),
-                esc_html($entry->email)
             );
         }
         echo '</ul>';

@@ -17,6 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
     async function handleEntryClick() {
         const entryId = this.dataset.entryId;
         
+        // Check if details are already present
+        if (this.nextElementSibling && this.nextElementSibling.classList.contains('entry-details')) {
+            // Remove existing details if clicked again
+            this.nextElementSibling.remove();
+            this.classList.remove('active');
+            return;
+        }
+        
         try {
             const response = await fetch(`${frontItFormSettings.restUrl}/entries/${entryId}`, {
                 headers: {
@@ -33,13 +41,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // Clear previous selection
             document.querySelectorAll('.entry-item.active').forEach(el => {
                 el.classList.remove('active');
+                const details = el.querySelector('.entry-details');
+                if (details) {
+                    details.remove();
+                }
             });
             
             // Mark current item as active
             this.classList.add('active');
             
-            // Display entry details
-            let detailsHtml = '<div class="entry-fields">';
+            // Create entry details
+            let detailsHtml = '<div class="entry-details"><div class="entry-fields">';
             for (const [key, value] of Object.entries(data.fields)) {
                 detailsHtml += `
                     <div class="entry-field">
@@ -48,14 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 `;
             }
-            detailsHtml += '</div>';
+            detailsHtml += '</div></div>';
             
-            entryContent.innerHTML = detailsHtml;
-            entryDetails.style.display = 'block';
+            // Insert entry details after the current item
+            this.insertAdjacentHTML('afterend', detailsHtml);
             
         } catch (error) {
             console.error('Error fetching entry details:', error);
-            entryContent.innerHTML = `<p class="error">${frontItFormSettings.i18n.errorLoadingDetails}</p>`;
+            this.insertAdjacentHTML('afterend', `<div class="entry-details error">${frontItFormSettings.i18n.errorLoadingDetails}</div>`);
         }
     }
     
